@@ -1,9 +1,14 @@
+import { resolveImage } from "@/lib/images";
+
+/** Photo by SEO file name (see docs/IMAGES.md) + descriptive alt text. */
+const img = (name: string, alt: string) => ({ src: resolveImage(name), alt });
+
 /**
  * Homepage copy — V1.1
  * Editorial direction: Sophisticated · Elegant · Intimate · Timeless
  *
- * Images: set `src` to a file in /public/images once the final photography is
- * selected. While `src` is null an on-brand placeholder is rendered.
+ * Images: upload the files listed in docs/IMAGES.md to /public/images.
+ * While a file is missing an on-brand placeholder is rendered.
  */
 export const home = {
   hero: {
@@ -12,7 +17,7 @@ export const home = {
     text: "An appreciation for meaningful encounters, thoughtful conversations and the beauty of shared experiences. A curious spirit, an open mind and a presence that feels entirely her own.",
     primaryCta: { label: "Book Me", href: "/book-me" },
     secondaryCta: { label: "Discover My World", href: "#about" },
-    image: { src: null, alt: "Gabrielle in soft evening light" },
+    image: img("gabrielle-independent-companion-hero", "Gabrielle in soft evening light"),
   },
   about: {
     eyebrow: "A little about me",
@@ -23,7 +28,7 @@ export const home = {
       "I believe that the most memorable moments are often found in the simplest things: a shared thought, a beautiful setting or the pleasure of being fully present.",
     ],
     cta: { label: "Get to Know Me", href: "/about" },
-    image: { src: null, alt: "Portrait of Gabrielle by the window" },
+    image: img("gabrielle-about-portrait-01", "Portrait of Gabrielle by the window"),
   },
   gallery: {
     eyebrow: "A glimpse into my world",
@@ -34,11 +39,11 @@ export const home = {
     ],
     cta: { label: "Explore the Gallery", href: "/gallery" },
     images: [
-      { src: null, alt: "Gallery photograph 1" },
-      { src: null, alt: "Gallery photograph 2" },
-      { src: null, alt: "Gallery photograph 3" },
-      { src: null, alt: "Gallery photograph 4" },
-      { src: null, alt: "Gallery photograph 5" },
+      img("gabrielle-editorial-portrait-01", "Gabrielle, editorial portrait"),
+      img("gabrielle-editorial-portrait-02", "Gabrielle, editorial photoshoot"),
+      img("gabrielle-editorial-portrait-03", "Gabrielle, black and white portrait"),
+      img("gabrielle-editorial-portrait-04", "Gabrielle, intimate evening portrait"),
+      img("gabrielle-editorial-portrait-05", "Gabrielle, elegant detail"),
     ],
   },
   connection: {
@@ -59,9 +64,9 @@ export const home = {
     ],
     cta: { label: "Explore My Personal Notes", href: "/lifestyle" },
     images: [
-      { src: null, alt: "A favourite fragrance" },
-      { src: null, alt: "A glass of wine at dinner" },
-      { src: null, alt: "An inspiring place" },
+      img("gabrielle-lifestyle-fragrance-01", "A favourite fragrance"),
+      img("gabrielle-lifestyle-wine-01", "A glass of wine at dinner"),
+      img("gabrielle-lifestyle-places-01", "An inspiring place"),
     ],
   },
   travels: {
@@ -76,7 +81,7 @@ export const home = {
     upcomingLabel: "Upcoming destinations",
     emptyText: "New destinations will be announced soon.",
     cta: { label: "View All Destinations", href: "/travels" },
-    image: { src: null, alt: "City skyline at dusk" },
+    image: img("gabrielle-travels-city-skyline", "City skyline at dusk"),
   },
   social: {
     eyebrow: "Stay connected",
@@ -96,8 +101,8 @@ export const home = {
     ],
     primaryCta: { label: "Book Me", href: "/book-me" },
     secondaryCta: { label: "Get in Touch", href: "/book-me#contact" },
-    image: { src: null, alt: "Gabrielle, evening portrait" },
+    image: img("gabrielle-book-me-portrait-01", "Gabrielle, evening portrait"),
   },
 } as const;
 
-export type ImageContent = { src: string | null; alt: string };
+export type ImageContent = { readonly src: string | null; readonly alt: string };

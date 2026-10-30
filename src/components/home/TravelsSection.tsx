@@ -43,7 +43,7 @@ export async function TravelsSection() {
 
         <div className="relative">
           <EditorialImage
-            image={featured?.image ? { src: featured.image, alt: `${featured.city} skyline` } : copy.image}
+            image={featured?.image ? { src: featured.image, alt: `${featured.city}, ${featured.country}` } : copy.image}
             tone="warm"
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="aspect-[4/5] w-full lg:aspect-[5/6]"

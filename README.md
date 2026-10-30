@@ -41,7 +41,7 @@ src/
 
 ## Content still to replace before launch
 
-- **Photography** — set `src` on each image in `src/content/home.ts` (files in `public/images/`). Until then an on-brand placeholder labelled `Photo · …` is shown.
+- **Photography** — upload the files listed in [`docs/IMAGES.md`](docs/IMAGES.md) to `public/images/`. Until then an on-brand placeholder labelled `Photo · …` is shown.
 - **Social / contact links** — `src/content/site.ts` (marked `TODO`).
 - **Travels** — `src/content/travels.ts` holds the example dates from the copy deck.
 
