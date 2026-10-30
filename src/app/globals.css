@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/* Design tokens — "Desire, Elegance & Presence" */
+@theme {
+  --color-obsidian: #11100f;
+  --color-deep-brown: #211813;
+  --color-warm-ivory: #f4eee5;
+  --color-champagne: #d8b995;
+  --color-muted-gold: #a98a67;
+  --color-soft-taupe: #b9aa9b;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", serif;
+  --font-body: var(--font-dm-sans), "DM Sans", sans-serif;
+
+  --container-content: 1200px;
+  --container-site: 1440px;
+
+  --animate-ticker: ticker 60s linear infinite;
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+:root {
+  --page-padding: max(1.25rem, 5vw);
+  --section-spacing: clamp(72px, 10vw, 112px);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-obsidian);
+  color: var(--color-warm-ivory);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-champagne);
+  color: var(--color-obsidian);
+}
+
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: var(--container-site);
+    margin-inline: auto;
+    padding-inline: var(--page-padding);
+  }
+
+  .section {
+    padding-block: var(--section-spacing);
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.75rem, 6vw, 5.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+  }
+
+  .h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.125rem, 4.2vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.005em;
+  }
+
+  .body-copy {
+    font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+    line-height: 1.7;
+  }
+}
+
+/* Reveal-on-scroll (progressive enhancement; content stays visible without JS) */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .animate-ticker { animation: none !important; }
+}
