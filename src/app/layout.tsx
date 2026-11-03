@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { site } from "@/content/site";
-import { resolveImage } from "@/lib/images";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { TravelTicker } from "@/components/layout/TravelTicker";
@@ -23,22 +22,10 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const ogImage = resolveImage("gabrielle-og-image");
-
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: site.seo.title, template: `%s | ${site.name}` },
   description: site.seo.description,
-  alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    siteName: site.name,
-    title: site.seo.title,
-    description: site.seo.description,
-    locale: "en_GB",
-    ...(ogImage && { images: [{ url: ogImage, width: 1200, height: 630, alt: site.seo.title }] }),
-  },
-  twitter: { card: "summary_large_image", title: site.seo.title, description: site.seo.description },
 };
 
 export const viewport: Viewport = {

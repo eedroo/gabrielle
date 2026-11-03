@@ -16,3 +16,6 @@ export function resolveImage(name: string): string | null {
   }
   return null;
 }
+
+/** Photo by SEO file name (see docs/IMAGES.md) + descriptive alt text. */
+export const photo = (name: string, alt: string) => ({ src: resolveImage(name), alt });

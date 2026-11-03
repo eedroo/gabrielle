@@ -28,12 +28,14 @@ Copy `.env.example` to `.env.local` and fill `NEXT_PUBLIC_SITE_URL`.
 
 ```
 src/
-  app/                 routes (/, sitemap.xml, robots.txt, 404)
+  app/                 routes (/, /about, sitemap.xml, robots.txt, 404)
   components/
     layout/            Header, MobileMenu, TravelTicker, Footer, SocialLinks
+    shared/            sections reused across pages (ClosingCTA)
+    about/             about page sections
     home/              homepage sections (Hero, About, Gallery, Connection, Lifestyle, Travels, Social, Booking CTA)
     ui/                Button, EditorialImage, SectionHeading, Divider, Reveal
-  content/             copy & settings (home.ts, site.ts, travels.ts)
+  content/             copy & settings (home.ts, about.ts, site.ts, travels.ts)
   lib/
     data.ts            data access layer — the only place to swap for Supabase
     travels.ts         travel rules: chronological order, hide past trips, current destination
@@ -54,7 +56,8 @@ src/
 ## Roadmap
 
 - [x] Homepage (copy V1.1), global header/ticker/footer, SEO base
-- [ ] About, Gallery (lightbox), Travels, Lifestyle, Book Me (booking flow + FAQ)
+- [x] About (copy V1)
+- [ ] Gallery (lightbox), Travels, Lifestyle, Book Me (booking flow + FAQ)
 - [ ] Privacy & cookie policy
 - [ ] Backoffice `/admin` (Supabase): dashboard, travels, gallery, content, social links, settings
 - [ ] Google Calendar availability for Book Me

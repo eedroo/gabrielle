@@ -1,7 +1,4 @@
-import { resolveImage } from "@/lib/images";
-
-/** Photo by SEO file name (see docs/IMAGES.md) + descriptive alt text. */
-const img = (name: string, alt: string) => ({ src: resolveImage(name), alt });
+import { photo as img } from "@/lib/images";
 
 /**
  * Homepage copy — V1.1
