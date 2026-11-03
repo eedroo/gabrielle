@@ -28,23 +28,25 @@ Copy `.env.example` to `.env.local` and fill `NEXT_PUBLIC_SITE_URL`.
 
 ```
 src/
-  app/                 routes (/, /about, sitemap.xml, robots.txt, 404)
+  app/                 routes (/, /about, /book-me, /api/availability, sitemap.xml, robots.txt, 404)
   components/
     layout/            Header, MobileMenu, TravelTicker, Footer, SocialLinks
     shared/            sections reused across pages (ClosingCTA)
     about/             about page sections
+    book-me/           book me sections + EnquiryForm (client)
     home/              homepage sections (Hero, About, Gallery, Connection, Lifestyle, Travels, Social, Booking CTA)
     ui/                Button, EditorialImage, SectionHeading, Divider, Reveal
-  content/             copy & settings (home.ts, about.ts, site.ts, travels.ts)
+  content/             copy & settings (home.ts, about.ts, book-me.ts, site.ts, travels.ts)
   lib/
     data.ts            data access layer — the only place to swap for Supabase
     travels.ts         travel rules: chronological order, hide past trips, current destination
+    availability.ts    Google Calendar availability (returns null until connected)
 ```
 
 ## Content still to replace before launch
 
 - **Photography** — upload the files listed in [`docs/IMAGES.md`](docs/IMAGES.md) to `public/images/`. Until then an on-brand placeholder labelled `Photo · …` is shown.
-- **Social / contact links** — `src/content/site.ts` (marked `TODO`).
+- **Social / contact links** — `src/content/site.ts` (marked `TODO`). WhatsApp number in international format, digits only.
 - **Travels** — `src/content/travels.ts` holds the example dates from the copy deck.
 
 ## Deploy (Vercel + GoDaddy)
@@ -57,7 +59,8 @@ src/
 
 - [x] Homepage (copy V1.1), global header/ticker/footer, SEO base
 - [x] About (copy V1)
-- [ ] Gallery (lightbox), Travels, Lifestyle, Book Me (booking flow + FAQ)
+- [x] Book Me (copy V1): enquiry form → WhatsApp / Telegram / email, FAQ with FAQPage schema
+- [ ] Gallery (lightbox), Travels, Lifestyle
 - [ ] Privacy & cookie policy
 - [ ] Backoffice `/admin` (Supabase): dashboard, travels, gallery, content, social links, settings
 - [ ] Google Calendar availability for Book Me

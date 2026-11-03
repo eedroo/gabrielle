@@ -12,7 +12,7 @@ type Props = {
     title: string;
     paragraphs: readonly string[];
     primaryCta: Cta;
-    secondaryCta: Cta;
+    secondaryCta?: Cta;
     image: ImageContent;
   };
 };
@@ -29,9 +29,11 @@ export function ClosingCTA({ content }: Props) {
           <Paragraphs items={content.paragraphs} className="mt-7 text-warm-ivory/75" />
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Button href={content.primaryCta.href}>{content.primaryCta.label}</Button>
-            <Button href={content.secondaryCta.href} variant="outline-light">
-              {content.secondaryCta.label}
-            </Button>
+            {content.secondaryCta && (
+              <Button href={content.secondaryCta.href} variant="outline-light">
+                {content.secondaryCta.label}
+              </Button>
+            )}
           </div>
         </div>
       </div>

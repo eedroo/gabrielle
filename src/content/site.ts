@@ -13,9 +13,11 @@ export const site = {
       "Discover Gabrielle, an independent high class companion. Explore her world, photography, lifestyle and upcoming destinations.",
   },
   contact: {
-    whatsapp: "https://wa.me/000000000", // TODO: official number
-    telegram: "https://t.me/username", // TODO: official handle
-    email: "mailto:hello@example.com", // TODO: official email
+    /** International format, digits only (e.g. 4915112345678) */
+    whatsappNumber: "000000000", // TODO: official number
+    /** Without the @ */
+    telegramUsername: "username", // TODO: official handle
+    email: "hello@example.com", // TODO: official email
   },
   social: {
     instagram: "https://instagram.com/username", // TODO
@@ -37,3 +39,17 @@ export const legalLinks = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Cookie Policy", href: "/cookie-policy" },
 ] as const;
+
+/** Direct links to each contact channel, optionally with a prepared message. */
+export const contactLinks = {
+  whatsapp: (text?: string) =>
+    `https://wa.me/${site.contact.whatsappNumber}${text ? `?text=${encodeURIComponent(text)}` : ""}`,
+  telegram: () => `https://t.me/${site.contact.telegramUsername}`,
+  email: (subject?: string, body?: string) => {
+    const params = new URLSearchParams();
+    if (subject) params.set("subject", subject);
+    if (body) params.set("body", body);
+    const query = params.toString().replace(/\+/g, "%20");
+    return `mailto:${site.contact.email}${query ? `?${query}` : ""}`;
+  },
+};

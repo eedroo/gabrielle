@@ -1,4 +1,4 @@
-import { site } from "@/content/site";
+import { contactLinks, site } from "@/content/site";
 import { Instagram, Mail, OnlyFans, Telegram, WhatsApp, XLogo } from "@/components/ui/Icons";
 
 export const socialChannels = [
@@ -8,9 +8,9 @@ export const socialChannels = [
 ] as const;
 
 export const contactChannels = [
-  { label: "WhatsApp", href: site.contact.whatsapp, Icon: WhatsApp },
-  { label: "Telegram", href: site.contact.telegram, Icon: Telegram },
-  { label: "Email", href: site.contact.email, Icon: Mail },
+  { label: "WhatsApp", href: contactLinks.whatsapp(), Icon: WhatsApp },
+  { label: "Telegram", href: contactLinks.telegram(), Icon: Telegram },
+  { label: "Email", href: contactLinks.email(), Icon: Mail },
 ] as const;
 
 type Props = { channels?: "social" | "contact" | "all"; className?: string; size?: number };
