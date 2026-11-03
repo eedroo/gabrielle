@@ -68,3 +68,13 @@ export function flagEmoji(countryCode: string): string {
     .toUpperCase()
     .replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt(0)));
 }
+
+/** "05 November — 12 November 2026" (year shown once when both dates share it) */
+export function formatRangeFull(trip: Travel): string {
+  const [sy] = trip.startDate.split("-");
+  const [ey] = trip.endDate.split("-");
+  const s = parts(trip.startDate);
+  const e = parts(trip.endDate);
+  const start = `${s.d} ${MONTHS_LONG[s.m]}${sy !== ey ? ` ${sy}` : ""}`;
+  return `${start} — ${e.d} ${MONTHS_LONG[e.m]} ${ey}`;
+}

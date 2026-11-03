@@ -109,6 +109,12 @@ export function EnquiryForm({ copy, cities }: { copy: EnquiryFormCopy; cities: C
     });
   };
 
+  // Preselect the city when arriving from a destination card (/book-me?city=<travel id>).
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get("city");
+    if (id && cities.some((c) => c.id === id)) setValues((v) => ({ ...v, city: id }));
+  }, [cities]);
+
   const trip = cities.find((c) => c.id === values.city);
   const today = todayIso();
   const minDate = trip && trip.startDate > today ? trip.startDate : today;

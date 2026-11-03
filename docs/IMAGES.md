@@ -45,6 +45,17 @@ quality you have (ideally under 3 MB, long side 2000–2500 px).
 | 22 | `gabrielle-book-me-introduction` | "A little about you." (desktop only) | Portrait 4:5 |
 | 23 | `gabrielle-book-me-closing` | Final "A good introduction is always welcome." | Landscape 16:9, subject on the left |
 
+## Travels (`/travels`)
+
+| # | File name (without extension) | Where | Format |
+|---|---|---|---|
+| 24 | `gabrielle-travels-hero` | Hero "The world is more beautiful when explored." | Landscape 16:9, subject on the right |
+| 25 | `gabrielle-travels-philosophy` | "Every destination has its own story." | Portrait 4:5 |
+| 26 | `gabrielle-travels-closing` | Final "Make a moment of it." | Landscape 16:9, subject on the left |
+
+Destination cards and "Currently exploring" use the per-city photos below
+(landscape 4:3), or `gabrielle-travels-city-skyline` (#11) when a city has none.
+
 ## Optional — one photo per destination
 
 The Travels card uses `gabrielle-travels-<city>` when it exists, for example
@@ -53,5 +64,5 @@ Otherwise it falls back to `gabrielle-travels-city-skyline`.
 
 ## Alt text
 
-Each photo already has descriptive alt text in `src/content/home.ts`, `src/content/about.ts` and `src/content/book-me.ts`. Adjust it there
+Each photo already has descriptive alt text in `src/content/home.ts`, `src/content/about.ts`, `src/content/book-me.ts` and `src/content/travels-page.ts`. Adjust it there
 if a photo shows something different (e.g. "Gabrielle in a black dress at dinner").
