@@ -19,3 +19,18 @@ export function resolveImage(name: string): string | null {
 
 /** Photo by SEO file name (see docs/IMAGES.md) + descriptive alt text. */
 export const photo = (name: string, alt: string) => ({ src: resolveImage(name), alt });
+
+/**
+ * Every photo named "<prefix>-NN.<ext>" (e.g. gabrielle-gallery-editorial-01.jpg),
+ * in number order. Lets a collection grow just by uploading files.
+ */
+export function listImages(prefix: string): string[] {
+  if (!fs.existsSync(DIR)) return [];
+  const pattern = new RegExp(`^${prefix.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}-(\\d+)(\\.[a-z]+)$`);
+  return fs
+    .readdirSync(DIR)
+    .map((file) => ({ file, match: file.match(pattern) }))
+    .filter(({ match }) => match && EXTENSIONS.includes(match[2]))
+    .sort((a, b) => Number(a.match![1]) - Number(b.match![1]))
+    .map(({ file }) => `/images/${file}`);
+}

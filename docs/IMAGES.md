@@ -56,6 +56,41 @@ quality you have (ideally under 3 MB, long side 2000–2500 px).
 Destination cards and "Currently exploring" use the per-city photos below
 (landscape 4:3), or `gabrielle-travels-city-skyline` (#11) when a city has none.
 
+## Lifestyle (`/lifestyle`)
+
+Sections "A fragrance can tell a story.", "Good taste is meant to be shared." and
+"Some places stay with you." reuse photos #8, #9 and #10 from the home.
+
+| # | File name (without extension) | Where | Format |
+|---|---|---|---|
+| 27 | `gabrielle-lifestyle-hero` | Hero "The little things that make life beautiful." | Landscape 16:9, subject on the right |
+| 28 | `gabrielle-lifestyle-introduction` | "An appreciation for the finer details." | Portrait 4:5 |
+| 29 | `gabrielle-lifestyle-gestures-01` | "It's the thought that makes it special." | Portrait 4:5 |
+| 30 | `gabrielle-lifestyle-closing` | Final "Every detail tells a story." | Landscape 16:9, subject on the left |
+
+Optional card photos (landscape 4:3), shown only when uploaded:
+`gabrielle-lifestyle-fragrance-<item>`, `gabrielle-lifestyle-place-<item>`,
+`gabrielle-lifestyle-wishlist-<item>`, where `<item>` is the id in `src/content/lifestyle.ts`
+(e.g. `gabrielle-lifestyle-fragrance-santal-33`).
+
+## Gallery (`/gallery`)
+
+| # | File name (without extension) | Where | Format |
+|---|---|---|---|
+| 31 | `gabrielle-gallery-hero` | Hero "A collection of moments." | Landscape 16:9, subject on the right |
+| 32 | `gabrielle-gallery-closing` | Final "There is always more to discover." | Landscape 16:9, subject on the left |
+
+**Collections** fill themselves: upload as many photos as you want, numbered, per collection.
+A collection with no photos is not shown, and the filter buttons only appear with two or more.
+
+- `gabrielle-gallery-editorial-01`, `-02`, `-03`, …
+- `gabrielle-gallery-portraits-01`, `-02`, …
+- `gabrielle-gallery-moments-01`, `-02`, …
+- `gabrielle-gallery-lifestyle-01`, `-02`, …
+
+Portrait 4:5 works best. Until a gallery photo exists, the page shows the five homepage
+editorial photos (#3–#7).
+
 ## Optional — one photo per destination
 
 The Travels card uses `gabrielle-travels-<city>` when it exists, for example
@@ -64,5 +99,5 @@ Otherwise it falls back to `gabrielle-travels-city-skyline`.
 
 ## Alt text
 
-Each photo already has descriptive alt text in `src/content/home.ts`, `src/content/about.ts`, `src/content/book-me.ts` and `src/content/travels-page.ts`. Adjust it there
+Each photo already has descriptive alt text in `src/content/home.ts`, `src/content/about.ts`, `src/content/book-me.ts`, `src/content/travels-page.ts`, `src/content/lifestyle.ts` and `src/content/gallery.ts` (gallery alt texts are generated per collection). Adjust it there
 if a photo shows something different (e.g. "Gabrielle in a black dress at dinner").

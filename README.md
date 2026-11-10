@@ -28,16 +28,18 @@ Copy `.env.example` to `.env.local` and fill `NEXT_PUBLIC_SITE_URL`.
 
 ```
 src/
-  app/                 routes (/, /about, /book-me, /travels, /api/availability, sitemap.xml, robots.txt, 404)
+  app/                 routes (/, /about, /book-me, /travels, /lifestyle, /gallery, /api/availability, sitemap.xml, robots.txt, 404)
   components/
     layout/            Header, MobileMenu, TravelTicker, Footer, SocialLinks
     shared/            sections reused across pages (PageHero, ClosingCTA)
     travels/           travels page sections
+    lifestyle/         lifestyle sections and cards
+    gallery/           GalleryGrid (client: filters + lightbox)
     about/             about page sections
     book-me/           book me sections + EnquiryForm (client)
     home/              homepage sections (Hero, About, Gallery, Connection, Lifestyle, Travels, Social, Booking CTA)
     ui/                Button, EditorialImage, SectionHeading, Divider, Reveal
-  content/             copy & settings (home.ts, about.ts, book-me.ts, travels-page.ts, site.ts, travels.ts)
+  content/             copy & settings (home.ts, about.ts, book-me.ts, travels-page.ts, lifestyle.ts, gallery.ts, site.ts, travels.ts)
   lib/
     data.ts            data access layer — the only place to swap for Supabase
     travels.ts         travel rules: chronological order, hide past trips, current destination
@@ -51,6 +53,7 @@ src/
 - **Share image (pending)** — `gabrielle-og-image` (1200 × 630) has not been uploaded yet; links shared on WhatsApp/social show no preview image until it is.
 - **Social / contact links** — `src/content/site.ts` (marked `TODO`). WhatsApp number in international format, digits only.
 - **Travels** — `src/content/travels.ts` holds the example dates from the copy deck.
+- **Lifestyle items** — the fragrances, places and wishlist in `src/content/lifestyle.ts` are examples; replace them with Gabrielle's own choices.
 
 ## Deploy (Vercel + GoDaddy)
 
@@ -64,7 +67,8 @@ src/
 - [x] About (copy V1)
 - [x] Book Me (copy V1): enquiry form → WhatsApp / Telegram / email, FAQ with FAQPage schema
 - [x] Travels (copy V1): current destination, upcoming cards → Book Me with the city preselected
-- [ ] Gallery (lightbox), Lifestyle
+- [x] Lifestyle (copy V1): fragrance, place and wishlist cards
+- [x] Gallery (copy V1): collections filled from numbered files, filters, lightbox
 - [ ] Privacy & cookie policy
 - [ ] Backoffice `/admin` (Supabase): dashboard, travels, gallery, content, social links, settings
 - [ ] Google Calendar availability for Book Me
