@@ -15,9 +15,12 @@ type Props = {
  * on-brand placeholder that is clearly identified as such (never shipped).
  */
 export function EditorialImage({ image, className = "", sizes = "100vw", priority, tone = "dark" }: Props) {
+  // Background images pass "absolute"; adding "relative" too would collapse them to zero height.
+  const position = /(^|\s)(absolute|fixed)(\s|$)/.test(className) ? "" : "relative";
+
   if (image.src) {
     return (
-      <div className={`relative overflow-hidden ${className}`}>
+      <div className={`${position} overflow-hidden ${className}`}>
         <Image src={image.src} alt={image.alt} fill sizes={sizes} priority={priority} className="object-cover" />
       </div>
     );
@@ -33,7 +36,7 @@ export function EditorialImage({ image, className = "", sizes = "100vw", priorit
       role="img"
       aria-label={image.alt}
       data-placeholder="image"
-      className={`relative overflow-hidden ${className}`}
+      className={`${position} overflow-hidden ${className}`}
       style={{ background: gradient }}
     >
       <div

@@ -47,6 +47,8 @@ src/
 ## Content still to replace before launch
 
 - **Photography** — upload the files listed in [`docs/IMAGES.md`](docs/IMAGES.md) to `public/images/`. Until then an on-brand placeholder labelled `Photo · …` is shown.
+- **Temporary photos** — the current files in `public/images/` are AI placeholders for the test link. Replace every one with Gabrielle's real photography before launch (same file names).
+- **Share image (pending)** — `gabrielle-og-image` (1200 × 630) has not been uploaded yet; links shared on WhatsApp/social show no preview image until it is.
 - **Social / contact links** — `src/content/site.ts` (marked `TODO`). WhatsApp number in international format, digits only.
 - **Travels** — `src/content/travels.ts` holds the example dates from the copy deck.
 
