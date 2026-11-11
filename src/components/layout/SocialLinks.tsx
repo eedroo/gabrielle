@@ -5,11 +5,11 @@ export const socialChannels = [
   { label: "Instagram", href: site.social.instagram, Icon: Instagram },
   { label: "OnlyFans", href: site.social.onlyfans, Icon: OnlyFans },
   { label: "X / Twitter", href: site.social.x, Icon: XLogo },
+  { label: "Telegram Channel", href: site.social.telegram, Icon: Telegram },
 ] as const;
 
 export const contactChannels = [
   { label: "WhatsApp", href: contactLinks.whatsapp(), Icon: WhatsApp },
-  { label: "Telegram", href: contactLinks.telegram(), Icon: Telegram },
   { label: "Email", href: contactLinks.email(), Icon: Mail },
 ] as const;
 

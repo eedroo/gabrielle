@@ -85,7 +85,7 @@ export const bookMe = {
       },
       {
         q: "Which contact method should I use?",
-        a: "You may contact me through WhatsApp, Telegram or email, whichever is most convenient for you.",
+        a: "You may contact me through WhatsApp or email, whichever is most convenient for you.",
       },
     ],
   },

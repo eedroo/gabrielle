@@ -32,10 +32,10 @@ export default function HomePage() {
       <HeroSection />
       <AboutPreview />
       <DestinationBanner />
+      <OccasionSection />
       <GalleryPreview />
       <ConnectionSection />
       <SocialSection />
-      <OccasionSection />
       <BookingCTA />
       <TravelsSection />
       <LifestylePreview />

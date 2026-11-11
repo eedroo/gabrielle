@@ -52,7 +52,7 @@ src/
 - **Videos** — background videos go in `public/videos/` (see docs/IMAGES.md, V1–V4).
 - **Temporary photos** — the current files in `public/images/` are AI placeholders for the test link. Replace every one with Gabrielle's real photography before launch (same file names).
 - **Share image (pending)** — `gabrielle-og-image` (1200 × 630) has not been uploaded yet; links shared on WhatsApp/social show no preview image until it is.
-- **Social / contact links** — `src/content/site.ts` (marked `TODO`). WhatsApp number in international format, digits only.
+- **Social / contact links** — `src/content/site.ts` (marked `TODO`): WhatsApp number (international format, digits only), email, Instagram, OnlyFans, X and the public Telegram channel.
 - **Travels** — `src/content/travels.ts` holds the example dates from the copy deck.
 - **Lifestyle items** — the fragrances, places and wishlist in `src/content/lifestyle.ts` are examples; replace them with Gabrielle's own choices.
 

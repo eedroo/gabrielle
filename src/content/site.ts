@@ -15,14 +15,14 @@ export const site = {
   contact: {
     /** International format, digits only (e.g. 4915112345678) */
     whatsappNumber: "000000000", // TODO: official number
-    /** Without the @ */
-    telegramUsername: "username", // TODO: official handle
     email: "hello@example.com", // TODO: official email
   },
   social: {
     instagram: "https://instagram.com/username", // TODO
     onlyfans: "https://onlyfans.com/username", // TODO
     x: "https://x.com/username", // TODO
+    /** Public Telegram channel (not a direct contact) */
+    telegram: "https://t.me/channelname", // TODO
   },
 } as const;
 
@@ -44,7 +44,6 @@ export const legalLinks = [
 export const contactLinks = {
   whatsapp: (text?: string) =>
     `https://wa.me/${site.contact.whatsappNumber}${text ? `?text=${encodeURIComponent(text)}` : ""}`,
-  telegram: () => `https://t.me/${site.contact.telegramUsername}`,
   email: (subject?: string, body?: string) => {
     const params = new URLSearchParams();
     if (subject) params.set("subject", subject);
