@@ -4,8 +4,9 @@ import { photo, resolveImage } from "@/lib/images";
  * Lifestyle page copy — V1
  * Editorial direction: Personal · Refined · Feminine · Curated
  *
- * EXAMPLE ITEMS — fragrances, places and wishlist below are illustrative
- * and must be replaced with Gabrielle's own choices (backoffice in phase 2).
+ * EXAMPLE ITEMS — fragrances, places and wishlist below are illustrative.
+ * With the database connected they are managed in the backoffice (Lifestyle);
+ * these remain only as the fallback when it is not.
  * Card photos are optional: upload gabrielle-lifestyle-<section>-<item-id>
  * (e.g. gabrielle-lifestyle-fragrance-santal-33) and it appears on the card.
  */
@@ -121,4 +122,3 @@ export const lifestyle = {
   },
 } as const;
 
-export type LifestyleCard = (typeof lifestyle.fragrances.items)[number];

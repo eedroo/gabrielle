@@ -1,7 +1,7 @@
 /**
  * Global site settings.
- * In phase 2 these values move to the backoffice (Supabase) — keep the shape.
- * Links marked TODO must be replaced with the official, validated URLs before launch.
+ * `contact` and `social` are only defaults: the backoffice (Settings → Links)
+ * overrides them when the database is connected. See src/lib/settings.ts.
  */
 export const site = {
   name: "Gabrielle",
@@ -40,15 +40,13 @@ export const legalLinks = [
   { label: "Cookie Policy", href: "/cookie-policy" },
 ] as const;
 
-/** Direct links to each contact channel, optionally with a prepared message. */
+/**
+ * WhatsApp links go through /whatsapp, which redirects to the number saved in
+ * the backoffice — so changing the number updates every link at once.
+ */
 export const contactLinks = {
-  whatsapp: (text?: string) =>
-    `https://wa.me/${site.contact.whatsappNumber}${text ? `?text=${encodeURIComponent(text)}` : ""}`,
-  email: (subject?: string, body?: string) => {
-    const params = new URLSearchParams();
-    if (subject) params.set("subject", subject);
-    if (body) params.set("body", body);
-    const query = params.toString().replace(/\+/g, "%20");
-    return `mailto:${site.contact.email}${query ? `?${query}` : ""}`;
-  },
+  whatsapp: (text?: string) => `/whatsapp${text ? `?text=${encodeURIComponent(text)}` : ""}`,
 };
+
+/** Links that leave the site (open in a new tab). */
+export const isExternalHref = (href: string) => /^https?:\/\//.test(href) || href.startsWith("/whatsapp");

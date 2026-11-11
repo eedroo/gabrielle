@@ -17,8 +17,11 @@ export function resolveImage(name: string): string | null {
   return null;
 }
 
-/** Photo by SEO file name (see docs/IMAGES.md) + descriptive alt text. */
-export const photo = (name: string, alt: string) => ({ src: resolveImage(name), alt });
+/**
+ * Photo by SEO file name (see docs/IMAGES.md) + descriptive alt text.
+ * `slot` lets the backoffice replace it with the official photo (src/lib/media-slots.ts).
+ */
+export const photo = (name: string, alt: string) => ({ slot: name, src: resolveImage(name), alt });
 
 /**
  * Every photo named "<prefix>-NN.<ext>" (e.g. gabrielle-gallery-editorial-01.jpg),

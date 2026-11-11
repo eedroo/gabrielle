@@ -1,6 +1,6 @@
 import { travelsPage } from "@/content/travels-page";
 import type { Travel } from "@/lib/travels";
-import { flagEmoji, formatRangeFull } from "@/lib/travels";
+import { cityImage, flagEmoji, formatRangeFull } from "@/lib/travels";
 import { Button } from "@/components/ui/Button";
 import { EditorialImage } from "@/components/ui/EditorialImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -8,8 +8,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 /** Only rendered when today falls inside a published trip. */
 export function CurrentDestination({ trip }: { trip: Travel }) {
   const { current, fallbackCityImage } = travelsPage;
-  const alt = `${trip.city}, ${trip.country}`;
-  const image = { src: trip.image ?? fallbackCityImage.src, alt };
+  const image = cityImage(trip, fallbackCityImage);
   return (
     <section className="section bg-warm-ivory text-obsidian">
       <div className="container-site grid items-center gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-20">

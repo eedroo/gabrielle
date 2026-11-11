@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ImageContent } from "@/content/home";
+import { getMediaOverrides } from "@/lib/media-slots";
 
 type Props = {
   image: ImageContent;
@@ -11,10 +12,16 @@ type Props = {
 };
 
 /**
- * Renders the final photograph when `image.src` is set; otherwise an
- * on-brand placeholder that is clearly identified as such (never shipped).
+ * Renders, in order of preference: the official photo saved in the backoffice
+ * for `image.slot`, the file in /public/images, or an on-brand placeholder.
  */
-export function EditorialImage({ image, className = "", sizes = "100vw", priority, tone = "dark" }: Props) {
+export async function EditorialImage({ image: given, className = "", sizes = "100vw", priority, tone = "dark" }: Props) {
+  const override = given.slot ? (await getMediaOverrides()).get(given.slot) : undefined;
+  const image = {
+    ...given,
+    src: override?.image_url || given.src,
+    alt: override?.alt || given.alt,
+  };
   // Background images pass "absolute"; adding "relative" too would collapse them to zero height.
   const position = /(^|\s)(absolute|fixed)(\s|$)/.test(className) ? "" : "relative";
 

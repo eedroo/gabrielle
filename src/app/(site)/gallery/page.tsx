@@ -7,10 +7,10 @@ import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export const metadata: Metadata = pageMetadata({ ...gallery.seo, path: "/gallery" });
+export const generateMetadata = (): Promise<Metadata> => pageMetadata({ ...gallery.seo, path: "/gallery" });
 
-export default function GalleryPage() {
-  const collections = getGalleryCollections();
+export default async function GalleryPage() {
+  const collections = await getGalleryCollections();
   return (
     <>
       <PageHero {...gallery.hero} />

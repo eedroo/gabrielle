@@ -1,6 +1,6 @@
 import { home } from "@/content/home";
 import { getCurrentTravel, getUpcomingTravels } from "@/lib/data";
-import { formatRangeLong } from "@/lib/travels";
+import { cityImage, formatRangeLong } from "@/lib/travels";
 import { Button } from "@/components/ui/Button";
 import { EditorialImage } from "@/components/ui/EditorialImage";
 
@@ -10,7 +10,7 @@ export async function DestinationBanner() {
   const [current, upcoming] = await Promise.all([getCurrentTravel(), getUpcomingTravels()]);
   const trip = current ?? upcoming[0] ?? null;
 
-  const image = trip ? { src: trip.image ?? travels.image.src, alt: `${trip.city}, ${trip.country}` } : travels.image;
+  const image = trip ? cityImage(trip, travels.image) : travels.image;
   const title = (current ? copy.titles.current : trip ? copy.titles.next : copy.titles.none).replace("{city}", trip?.city ?? "");
   const href = trip ? `${copy.cta.href}?city=${encodeURIComponent(trip.id)}#enquiry` : copy.cta.href;
 

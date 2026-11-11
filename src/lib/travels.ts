@@ -78,3 +78,9 @@ export function formatRangeFull(trip: Travel): string {
   const start = `${s.d} ${MONTHS_LONG[s.m]}${sy !== ey ? ` ${sy}` : ""}`;
   return `${start} — ${e.d} ${MONTHS_LONG[e.m]} ${ey}`;
 }
+
+/** The trip's own photo, or the shared city fallback (keeping its backoffice slot). */
+export function cityImage(trip: Travel, fallback: { src: string | null; alt: string; slot?: string }) {
+  const alt = `${trip.city}, ${trip.country}`;
+  return trip.image ? { src: trip.image, alt } : { ...fallback, alt };
+}

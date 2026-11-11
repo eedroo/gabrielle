@@ -1,11 +1,13 @@
 import { home } from "@/content/home";
-import { socialChannels } from "@/components/layout/SocialLinks";
+import { getChannels } from "@/lib/settings";
+import { channelIcons } from "@/components/layout/SocialLinks";
 import { ArrowRight } from "@/components/ui/Icons";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function SocialSection() {
+export async function SocialSection() {
   const { social } = home;
+  const { social: channels } = await getChannels();
   return (
     <section className="section bg-obsidian">
       <div className="container-site grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
@@ -14,7 +16,9 @@ export function SocialSection() {
           <Paragraphs items={social.paragraphs} className="mt-7 text-warm-ivory/70" />
         </div>
         <ul className="divide-y divide-warm-ivory/10 border-y border-warm-ivory/10">
-          {socialChannels.map(({ label, href, Icon }) => (
+          {channels.map(({ key, label, href }) => {
+            const Icon = channelIcons[key];
+            return (
             <li key={label}>
               <a
                 href={href}
@@ -27,7 +31,8 @@ export function SocialSection() {
                 <ArrowRight className="ml-auto transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </div>
     </section>

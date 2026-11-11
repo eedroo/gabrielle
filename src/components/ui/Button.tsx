@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { isExternalHref } from "@/content/site";
 import type { ReactNode } from "react";
 import { ArrowRight } from "./Icons";
 
@@ -23,17 +24,23 @@ type Props = {
 };
 
 export function Button({ href, children, variant = "primary", arrow = true, className = "" }: Props) {
-  const external = /^https?:\/\//.test(href);
-  return (
-    <Link
-      href={href}
-      {...(external && { target: "_blank", rel: "noopener noreferrer" })}
-      className={`group inline-flex min-h-12 items-center justify-center gap-3 border px-7 py-3 text-[0.6875rem] font-medium uppercase tracking-[0.2em] transition-colors duration-300 ${variants[variant]} ${className}`}
-    >
+  const classes = `group inline-flex min-h-12 items-center justify-center gap-3 border px-7 py-3 text-[0.6875rem] font-medium uppercase tracking-[0.2em] transition-colors duration-300 ${variants[variant]} ${className}`;
+  const content = (
+    <>
       {children}
       {arrow && (
         <ArrowRight width={14} height={14} className="transition-transform duration-300 group-hover:translate-x-1" />
       )}
+    </>
+  );
+  // Outbound links (incl. the /whatsapp redirect) open in a new tab and skip prefetching.
+  return isExternalHref(href) ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+      {content}
+    </a>
+  ) : (
+    <Link href={href} className={classes}>
+      {content}
     </Link>
   );
 }

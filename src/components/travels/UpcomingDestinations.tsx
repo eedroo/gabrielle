@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { travelsPage } from "@/content/travels-page";
 import type { Travel } from "@/lib/travels";
-import { flagEmoji, formatRangeFull } from "@/lib/travels";
+import { cityImage, flagEmoji, formatRangeFull } from "@/lib/travels";
 import { EditorialImage } from "@/components/ui/EditorialImage";
 import { ArrowRight } from "@/components/ui/Icons";
 import { Paragraphs } from "@/components/ui/Paragraphs";
@@ -24,7 +24,7 @@ export function UpcomingDestinations({ trips }: { trips: Travel[] }) {
             {trips.map((trip) => (
               <li key={trip.id} className="group flex flex-col border border-warm-ivory/10 bg-deep-brown/40" data-reveal>
                 <EditorialImage
-                  image={{ src: trip.image ?? fallbackCityImage.src, alt: `${trip.city}, ${trip.country}` }}
+                  image={cityImage(trip, fallbackCityImage)}
                   tone="warm"
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                   className="aspect-[4/3] w-full"

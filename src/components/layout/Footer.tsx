@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { legalLinks, navigation, site } from "@/content/site";
-import { contactChannels, socialChannels } from "./SocialLinks";
+import { getChannels } from "@/lib/settings";
+import { channelLinkProps } from "./SocialLinks";
 
 function FooterList({ title, items }: { title: string; items: { label: string; href: string; external?: boolean }[] }) {
   return (
@@ -10,12 +11,7 @@ function FooterList({ title, items }: { title: string; items: { label: string; h
         {items.map((i) => (
           <li key={i.label}>
             {i.external ? (
-              <a
-                href={i.href}
-                target={i.href.startsWith("mailto:") ? undefined : "_blank"}
-                rel="noopener noreferrer me"
-                className="transition hover:text-champagne"
-              >
+              <a href={i.href} {...channelLinkProps(i.href)} className="transition hover:text-champagne">
                 {i.label}
               </a>
             ) : (
@@ -30,7 +26,8 @@ function FooterList({ title, items }: { title: string; items: { label: string; h
   );
 }
 
-export function Footer() {
+export async function Footer() {
+  const { social, contact } = await getChannels();
   const year = new Date().getFullYear();
   return (
     <footer className="border-t border-warm-ivory/10 bg-obsidian">
@@ -42,8 +39,8 @@ export function Footer() {
           <p className="mt-4 font-display text-xl italic text-champagne">{site.signature}</p>
         </div>
         <FooterList title="Navigation" items={navigation.map((n) => ({ ...n }))} />
-        <FooterList title="Contact" items={contactChannels.map(({ label, href }) => ({ label, href, external: true }))} />
-        <FooterList title="Social" items={socialChannels.map(({ label, href }) => ({ label, href, external: true }))} />
+        <FooterList title="Contact" items={contact.map(({ label, href }) => ({ label, href, external: true }))} />
+        <FooterList title="Social" items={social.map(({ label, href }) => ({ label, href, external: true }))} />
         <FooterList title="Legal" items={legalLinks.map((l) => ({ ...l }))} />
       </div>
       <div className="border-t border-warm-ivory/10">

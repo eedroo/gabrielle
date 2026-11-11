@@ -9,7 +9,7 @@ import { UpcomingDestinations } from "@/components/travels/UpcomingDestinations"
 import { PhilosophySection } from "@/components/travels/PhilosophySection";
 import { OtherDestinations } from "@/components/travels/OtherDestinations";
 
-export const metadata: Metadata = pageMetadata({ ...travelsPage.seo, path: "/travels" });
+export const generateMetadata = (): Promise<Metadata> => pageMetadata({ ...travelsPage.seo, path: "/travels" });
 
 // Re-render hourly so the current destination follows the calendar.
 export const revalidate = 3600;

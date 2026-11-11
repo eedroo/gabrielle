@@ -8,7 +8,7 @@ import { FAQSection } from "@/components/book-me/FAQSection";
 import { BackgroundMedia } from "@/components/ui/BackgroundMedia";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 
-export const metadata: Metadata = pageMetadata({ ...bookMe.seo, path: "/book-me" });
+export const generateMetadata = (): Promise<Metadata> => pageMetadata({ ...bookMe.seo, path: "/book-me" });
 
 // Cities follow the published travels.
 export const revalidate = 3600;

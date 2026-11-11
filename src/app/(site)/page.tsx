@@ -12,7 +12,7 @@ import type { Metadata } from "next";
 import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = pageMetadata({ ...site.seo, path: "/" });
+export const generateMetadata = (): Promise<Metadata> => pageMetadata({ ...site.seo, path: "/" });
 
 // Re-render hourly so "current destination" and the ticker follow the calendar.
 export const revalidate = 3600;

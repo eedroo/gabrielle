@@ -5,9 +5,10 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { navigation, site } from "@/content/site";
 import { Close, Menu } from "@/components/ui/Icons";
+import type { Channel } from "@/lib/channels";
 import { SocialLinks } from "./SocialLinks";
 
-export function Header() {
+export function Header({ social, contact }: { social: Channel[]; contact: Channel[] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -65,7 +66,7 @@ export function Header() {
           </ul>
         </nav>
 
-        <SocialLinks channels="social" className="hidden lg:flex" size={16} />
+        <SocialLinks channels={social} className="hidden lg:flex" size={16} />
 
         <button
           type="button"
@@ -108,7 +109,7 @@ export function Header() {
             Book Me
           </Link>
           <div className="mt-auto border-t border-warm-ivory/10 pt-8">
-            <SocialLinks channels="all" size={20} className="flex-wrap" />
+            <SocialLinks channels={[...social, ...contact]} size={20} className="flex-wrap" />
           </div>
         </nav>
       </div>

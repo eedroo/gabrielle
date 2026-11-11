@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { LifestyleCard } from "@/content/lifestyle";
+import type { LifestyleCard } from "@/lib/data";
 
 type Props = { items: readonly LifestyleCard[]; tone?: "light" | "dark"; numbered?: boolean };
 

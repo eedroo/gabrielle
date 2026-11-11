@@ -1,5 +1,9 @@
 # Photos — file names to upload
 
+> **Official photos and videos are uploaded in the backoffice** (`/admin` → Photos & videos,
+> Gallery). The files described below, in `public/images` and `public/videos`, are the
+> temporary placeholders the site falls back to.
+
 Upload to **`public/images/`** using exactly these names (lowercase, hyphens).
 Any of `.webp` (preferred), `.avif`, `.jpg` or `.png` works. The site picks the file up
 automatically on the next deploy. Until then, a placeholder is shown.

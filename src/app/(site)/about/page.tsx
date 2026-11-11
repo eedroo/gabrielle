@@ -8,7 +8,7 @@ import { AppreciateSection } from "@/components/about/AppreciateSection";
 import { MyWorldSection } from "@/components/about/MyWorldSection";
 import { ClosingCTA } from "@/components/shared/ClosingCTA";
 
-export const metadata: Metadata = pageMetadata({ ...about.seo, path: "/about" });
+export const generateMetadata = (): Promise<Metadata> => pageMetadata({ ...about.seo, path: "/about" });
 
 export default function AboutPage() {
   return (

@@ -129,4 +129,9 @@ export const home = {
   },
 } as const;
 
-export type ImageContent = { readonly src: string | null; readonly alt: string };
+export type ImageContent = {
+  readonly src: string | null;
+  readonly alt: string;
+  /** Backoffice slot name; when set, an official photo saved there takes precedence. */
+  readonly slot?: string;
+};

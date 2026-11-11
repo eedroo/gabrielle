@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
 import { resolveImage } from "@/lib/images";
-
-const ogImage = resolveImage("gabrielle-og-image");
-const ogImages = ogImage ? [{ url: ogImage, width: 1200, height: 630, alt: site.seo.title }] : undefined;
+import { getMediaOverrides } from "@/lib/media-slots";
 
 /** Full metadata for a page. Next replaces (not merges) openGraph per page, so build it whole. */
-export function pageMetadata({ title, description, path }: { title: string; description: string; path: string }): Metadata {
+export async function pageMetadata({ title, description, path }: { title: string; description: string; path: string }): Promise<Metadata> {
+  // Share image: the one saved in the backoffice, else the file in /public/images.
+  const ogImage = (await getMediaOverrides()).get("gabrielle-og-image")?.image_url || resolveImage("gabrielle-og-image");
+  const ogImages = ogImage ? [{ url: ogImage, width: 1200, height: 630, alt: site.seo.title }] : undefined;
   return {
     title: { absolute: title },
     description,
