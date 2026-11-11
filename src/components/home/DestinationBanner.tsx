@@ -11,6 +11,7 @@ export async function DestinationBanner() {
   const trip = current ?? upcoming[0] ?? null;
 
   const image = trip ? { src: trip.image ?? travels.image.src, alt: `${trip.city}, ${trip.country}` } : travels.image;
+  const title = (current ? copy.titles.current : trip ? copy.titles.next : copy.titles.none).replace("{city}", trip?.city ?? "");
   const href = trip ? `${copy.cta.href}?city=${encodeURIComponent(trip.id)}#enquiry` : copy.cta.href;
 
   return (
@@ -24,7 +25,7 @@ export async function DestinationBanner() {
               {current ? copy.currentLabel : copy.nextLabel} · {trip.city} · {formatRangeLong(trip)}
             </p>
           )}
-          <h2 className="mt-4 font-display text-3xl leading-tight text-balance sm:text-4xl">{copy.title}</h2>
+          <h2 className="mt-4 font-display text-3xl leading-tight text-balance sm:text-4xl">{title}</h2>
         </div>
         <Button href={href} className="shrink-0 self-start md:self-auto">
           {copy.cta.label}

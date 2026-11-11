@@ -22,7 +22,12 @@ export const home = {
     media: media("gabrielle-independent-companion-hero", "Gabrielle in soft evening light"),
   },
   destinationBanner: {
-    title: "Planning to be in town? I would love to hear from you.",
+    /** {city} is replaced with the destination. "current" while she is there, "next" before the trip. */
+    titles: {
+      current: "Are you in {city}? I would love to hear from you.",
+      next: "Will you be in {city}? I would love to hear from you.",
+      none: "Are you in town? I would love to hear from you.",
+    },
     currentLabel: "Current destination",
     nextLabel: "Next destination",
     cta: { label: "Book Now", href: "/book-me" },
