@@ -34,3 +34,28 @@ export function listImages(prefix: string): string[] {
     .sort((a, b) => Number(a.match![1]) - Number(b.match![1]))
     .map(({ file }) => `/images/${file}`);
 }
+
+const VIDEO_DIR = path.join(process.cwd(), "public", "videos");
+const VIDEO_EXTENSIONS = [".mp4", ".webm"];
+
+export type VideoSource = { src: string; mobileSrc: string | null };
+
+function findVideo(name: string): string | null {
+  for (const ext of VIDEO_EXTENSIONS) {
+    if (fs.existsSync(path.join(VIDEO_DIR, name + ext))) return `/videos/${name}${ext}`;
+  }
+  return null;
+}
+
+/**
+ * Background video "<name>.mp4" in /public/videos, sharing its base name with
+ * the photo used as cover/fallback. An optional "<name>-mobile.mp4" (vertical)
+ * is served on phones.
+ */
+export function resolveVideo(name: string): VideoSource | null {
+  const src = findVideo(name);
+  return src ? { src, mobileSrc: findVideo(`${name}-mobile`) } : null;
+}
+
+/** Photo + optional background video sharing one SEO base name. */
+export const media = (name: string, alt: string) => ({ ...photo(name, alt), video: resolveVideo(name) });

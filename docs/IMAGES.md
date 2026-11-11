@@ -22,7 +22,7 @@ quality you have (ideally under 3 MB, long side 2000–2500 px).
 | 9 | `gabrielle-lifestyle-wine-01` | Home · "A world of my own" | Square 1:1 |
 | 10 | `gabrielle-lifestyle-places-01` | Home · "A world of my own" | Square 1:1 |
 | 11 | `gabrielle-travels-city-skyline` | Home · Travels (default city photo) | Portrait 4:5 |
-| 12 | `gabrielle-book-me-portrait-01` | Home · final "Let's make time…" | Landscape 16:9, subject on the left |
+| 12 | `gabrielle-book-me-portrait-01` | Home · "Let's make time…" (Book an Appointment) | Landscape 16:9, subject on the left |
 | 13 | `gabrielle-og-image` | Preview shared on WhatsApp/social (all pages) | Exactly 1200 × 630 |
 
 ## About (`/about`)
@@ -42,8 +42,8 @@ quality you have (ideally under 3 MB, long side 2000–2500 px).
 | # | File name (without extension) | Where | Format |
 |---|---|---|---|
 | 21 | `gabrielle-book-me-hero` | Hero "Let's make time for something memorable." | Landscape 16:9, subject on the right |
-| 22 | `gabrielle-book-me-introduction` | "A little about you." (desktop only) | Portrait 4:5 |
-| 23 | `gabrielle-book-me-closing` | Final "A good introduction is always welcome." | Landscape 16:9, subject on the left |
+
+
 
 ## Travels (`/travels`)
 
@@ -90,6 +90,27 @@ A collection with no photos is not shown, and the filter buttons only appear wit
 
 Portrait 4:5 works best. Until a gallery photo exists, the page shows the five homepage
 editorial photos (#3–#7).
+
+## Videos (`public/videos/`)
+
+Background videos use the **same base name as their photo**: the photo shows while the
+video loads, and stays if there is no video. Upload both the photo (`public/images/`) and
+the video (`public/videos/`).
+
+| # | File name (without extension) | Where | Video | Photo |
+|---|---|---|---|---|
+| V1 | `gabrielle-independent-companion-hero` | Home · hero (name + WhatsApp + scroll arrow) | needed | already uploaded (#1) |
+| V2 | `gabrielle-home-connection` | Home · "Some things are better felt than described." | needed | **new**, landscape 16:9 |
+| V3 | `gabrielle-home-occasion` | Home · "Your time, your occasion." | needed | **new**, landscape 16:9 |
+| V4 | `gabrielle-book-me-hero` | Book Me · hero with the enquiry form | needed | already uploaded (#21) |
+
+Video specs: `.mp4` (H.264, no audio), 1920×1080, 8–20 s seamless loop, **under 8 MB**
+(GitHub refuses files over 100 MB, and lighter videos start faster).
+Optional vertical version for phones: same name + `-mobile` (e.g.
+`gabrielle-independent-companion-hero-mobile.mp4`, 1080×1920).
+
+The home "Planning to be in town?" banner uses the current/next destination's city photo
+(`gabrielle-travels-<city>`, or #11 as fallback).
 
 ## Optional — one photo per destination
 

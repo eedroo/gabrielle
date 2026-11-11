@@ -103,3 +103,15 @@ body {
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   .animate-ticker { animation: none !important; }
 }
+
+/* Scroll-down cue in the home hero */
+@keyframes scroll-cue {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+.animate-scroll-cue {
+  animation: scroll-cue 2s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-cue { animation: none; }
+}

@@ -49,6 +49,7 @@ src/
 ## Content still to replace before launch
 
 - **Photography** — upload the files listed in [`docs/IMAGES.md`](docs/IMAGES.md) to `public/images/`. Until then an on-brand placeholder labelled `Photo · …` is shown.
+- **Videos** — background videos go in `public/videos/` (see docs/IMAGES.md, V1–V4).
 - **Temporary photos** — the current files in `public/images/` are AI placeholders for the test link. Replace every one with Gabrielle's real photography before launch (same file names).
 - **Share image (pending)** — `gabrielle-og-image` (1200 × 630) has not been uploaded yet; links shared on WhatsApp/social show no preview image until it is.
 - **Social / contact links** — `src/content/site.ts` (marked `TODO`). WhatsApp number in international format, digits only.
@@ -65,7 +66,9 @@ src/
 
 - [x] Homepage (copy V1.1), global header/ticker/footer, SEO base
 - [x] About (copy V1)
-- [x] Book Me (copy V1): enquiry form → WhatsApp / Telegram / email, FAQ with FAQPage schema
+- [x] Book Me (copy V1, revised): two-step enquiry in the video hero → prepared WhatsApp message, FAQ with FAQPage schema
+- [x] Home revision: video hero (name, WhatsApp, scroll cue; H1 kept as the signature), destination banner, video statements with Book Now, new section order
+- [x] Floating WhatsApp button on every page
 - [x] Travels (copy V1): current destination, upcoming cards → Book Me with the city preselected
 - [x] Lifestyle (copy V1): fragrance, place and wishlist cards
 - [x] Gallery (copy V1): collections filled from numbered files, filters, lightbox

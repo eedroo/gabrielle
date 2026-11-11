@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { TravelTicker } from "@/components/layout/TravelTicker";
 import { RevealObserver } from "@/components/ui/Reveal";
+import { FloatingWhatsApp } from "@/components/layout/FloatingWhatsApp";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <TravelTicker />
         <main id="main">{children}</main>
         <Footer />
+        <FloatingWhatsApp />
         <RevealObserver />
       </body>
     </html>

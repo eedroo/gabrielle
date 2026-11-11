@@ -23,9 +23,11 @@ type Props = {
 };
 
 export function Button({ href, children, variant = "primary", arrow = true, className = "" }: Props) {
+  const external = /^https?:\/\//.test(href);
   return (
     <Link
       href={href}
+      {...(external && { target: "_blank", rel: "noopener noreferrer" })}
       className={`group inline-flex min-h-12 items-center justify-center gap-3 border px-7 py-3 text-[0.6875rem] font-medium uppercase tracking-[0.2em] transition-colors duration-300 ${variants[variant]} ${className}`}
     >
       {children}

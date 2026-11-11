@@ -25,7 +25,7 @@ export const travelsPage = {
     /** {city} is replaced with the current destination */
     title: "A moment in {city}.",
     text: "A little glimpse of where I am at the moment.",
-    cta: { label: "Get in Touch", href: "/book-me#contact" },
+    cta: { label: "Get in Touch", href: "/book-me" },
   },
   upcoming: {
     eyebrow: "Where to next?",
@@ -53,7 +53,7 @@ export const travelsPage = {
       "If you have a particular destination in mind, feel free to get in touch.",
       "I am always open to discussing travel possibilities and exploring where our plans might meet.",
     ],
-    cta: { label: "Get in Touch", href: "/book-me#contact" },
+    cta: { label: "Get in Touch", href: "/book-me" },
   },
   closing: {
     eyebrow: "When our paths cross",

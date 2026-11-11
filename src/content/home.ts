@@ -1,4 +1,5 @@
-import { photo as img } from "@/lib/images";
+import { contactLinks } from "@/content/site";
+import { media, photo as img } from "@/lib/images";
 
 /**
  * Homepage copy — V1.1
@@ -6,15 +7,25 @@ import { photo as img } from "@/lib/images";
  *
  * Images: upload the files listed in docs/IMAGES.md to /public/images.
  * While a file is missing an on-brand placeholder is rendered.
+ * Videos: same base name in /public/videos (the photo is their cover).
  */
+const bookNow = { label: "Book Now", href: "/book-me" };
 export const home = {
   hero: {
+    /** Eyebrow and text stay in the HTML for search engines, visually hidden behind the video. */
     eyebrow: "Independent High Class Companion",
+    /** H1, shown as the signature in the bottom-right corner */
     title: "The beauty of a genuine connection.",
     text: "An appreciation for meaningful encounters, thoughtful conversations and the beauty of shared experiences. A curious spirit, an open mind and a presence that feels entirely her own.",
-    primaryCta: { label: "Book Me", href: "/book-me" },
-    secondaryCta: { label: "Discover My World", href: "#about" },
-    image: img("gabrielle-independent-companion-hero", "Gabrielle in soft evening light"),
+    whatsapp: { label: "Chat with Gabrielle on WhatsApp", href: contactLinks.whatsapp() },
+    scroll: { label: "Scroll to discover more", href: "#about" },
+    media: media("gabrielle-independent-companion-hero", "Gabrielle in soft evening light"),
+  },
+  destinationBanner: {
+    title: "Planning to be in town? I would love to hear from you.",
+    currentLabel: "Current destination",
+    nextLabel: "Next destination",
+    cta: { label: "Book Now", href: "/book-me" },
   },
   about: {
     eyebrow: "A little about me",
@@ -50,6 +61,17 @@ export const home = {
       "I am drawn to people with stories to tell, places that inspire and conversations that flow effortlessly.",
       "I value kindness, curiosity, humour and the little gestures that make an encounter feel personal. For me, connection is not something to define, but something to experience.",
     ],
+    cta: bookNow,
+    media: media("gabrielle-home-connection", "Gabrielle, candlelit evening atmosphere"),
+  },
+  occasion: {
+    title: "Your time, your occasion.",
+    paragraphs: [
+      "Whether it’s an elegant evening, a dinner date, a special event or time away together, I appreciate experiences that leave room for conversation, spontaneity and genuine connection.",
+      "Every occasion deserves its own atmosphere, with discretion, respect and thoughtful attention to detail.",
+    ],
+    cta: bookNow,
+    media: media("gabrielle-home-occasion", "Gabrielle dressed for an elegant evening out"),
   },
   lifestyle: {
     eyebrow: "Little things I love",
@@ -96,8 +118,8 @@ export const home = {
       "Tell me a little about yourself, when you have in mind and the kind of experience you are looking forward to.",
       "I look forward to hearing from you.",
     ],
-    primaryCta: { label: "Book Me", href: "/book-me" },
-    secondaryCta: { label: "Get in Touch", href: "/book-me#contact" },
+    primaryCta: { label: "Book an Appointment", href: "/book-me" },
+    secondaryCta: { label: "Get in Touch", href: contactLinks.whatsapp() },
     image: img("gabrielle-book-me-portrait-01", "Gabrielle, evening portrait"),
   },
 } as const;
