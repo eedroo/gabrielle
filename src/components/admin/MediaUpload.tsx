@@ -57,7 +57,7 @@ export function MediaUpload({ name, folder, kind = "image", storage, label, mult
         onChange={(e) => handle(e.target.files)}
       />
       <button type="button" disabled={progress !== null} onClick={() => input.current?.click()} className={buttonClass.secondary}>
-        {progress !== null ? `Uploading… ${Math.round(progress)}%` : (label ?? (kind === "image" ? "Upload photo" : "Upload video"))}
+        {progress !== null ? (progress > 0 && progress < 100 ? `Uploading… ${Math.round(progress)}%` : "Uploading…") : (label ?? (kind === "image" ? "Upload photo" : "Upload video"))}
       </button>
       {error && <p className="mt-2 text-xs text-red-800">{error}</p>}
     </div>

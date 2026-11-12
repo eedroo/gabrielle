@@ -1,6 +1,9 @@
 import "server-only";
 import { del } from "@vercel/blob";
 
+// Fail within seconds instead of retrying for minutes when Blob rejects a request.
+process.env.VERCEL_BLOB_RETRIES ??= "2";
+
 export const MAX_UPLOAD_BYTES = 200 * 1024 * 1024; // videos included
 export const UPLOAD_CONTENT_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif", "video/mp4", "video/webm"] as const;
 
