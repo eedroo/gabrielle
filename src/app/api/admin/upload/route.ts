@@ -3,7 +3,7 @@ import path from "node:path";
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse, type NextRequest } from "next/server";
 import { getAdmin } from "@/lib/admin/session";
-import { MAX_UPLOAD_BYTES, UPLOAD_CONTENT_TYPES, blobEnabled } from "@/lib/admin/storage";
+import { MAX_UPLOAD_BYTES, UPLOAD_CONTENT_TYPES, blobToken, storageProblem } from "@/lib/admin/storage";
 
 export const dynamic = "force-dynamic";
 
@@ -15,10 +15,12 @@ export const dynamic = "force-dynamic";
 export async function POST(request: NextRequest) {
   if (!(await getAdmin())) return NextResponse.json({ error: "Not signed in" }, { status: 401 });
 
-  if (blobEnabled()) {
+  const token = blobToken();
+  if (token) {
     const body = (await request.json()) as HandleUploadBody;
     try {
       const result = await handleUpload({
+        token,
         body,
         request,
         onBeforeGenerateToken: async () => ({
@@ -34,7 +36,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (process.env.NODE_ENV === "production") {
-    return NextResponse.json({ error: "File storage is not configured (BLOB_READ_WRITE_TOKEN)." }, { status: 500 });
+    return NextResponse.json({ error: storageProblem() }, { status: 500 });
   }
 
   const form = await request.formData();

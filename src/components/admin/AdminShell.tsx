@@ -16,7 +16,7 @@ const nav = [
   { href: "/admin/account", label: "Account" },
 ];
 
-export function AdminShell({ name, children }: { name: string; children: ReactNode }) {
+export function AdminShell({ name, warning, children }: { name: string; warning?: string | null; children: ReactNode }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [pathname]);
@@ -79,6 +79,11 @@ export function AdminShell({ name, children }: { name: string; children: ReactNo
 
       <main className="min-w-0 flex-1 px-5 py-8 sm:px-8 lg:px-12 lg:py-12">
         <p className="mb-6 text-sm text-obsidian/55">Hello, {name}</p>
+        {warning && (
+          <p role="alert" className="mx-auto mb-8 max-w-6xl rounded-lg border border-amber-700/20 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            {warning}
+          </p>
+        )}
         <div className="mx-auto max-w-6xl">{children}</div>
       </main>
     </div>
