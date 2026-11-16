@@ -2,8 +2,8 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { EnquiryFormCopy } from "@/content/book-me";
-import { contactLinks, site } from "@/content/site";
-import type { SlotAvailability } from "@/lib/availability";
+import { site } from "@/content/site";
+import type { SlotResult as SlotAvailability } from "@/lib/availability-core";
 import { ArrowRight, WhatsApp } from "@/components/ui/Icons";
 
 export type CityOption = {
@@ -70,7 +70,7 @@ function ErrorText({ id, show }: { id: string; show: boolean }) {
 }
 
 /** Two-step enquiry: 1) when, 2) introduction, then sent as a prepared WhatsApp message. */
-export function EnquiryForm({ copy, cities }: { copy: EnquiryFormCopy; cities: CityOption[] }) {
+export function EnquiryForm({ copy, cities, whatsappNumber }: { copy: EnquiryFormCopy; cities: CityOption[]; whatsappNumber: string }) {
   const uid = useId();
   const fid = (f: string) => `${uid}-${f}`;
   const { availability: a, introduction: intro } = copy;
@@ -204,7 +204,8 @@ export function EnquiryForm({ copy, cities }: { copy: EnquiryFormCopy; cities: C
 
   function send() {
     if (!validate(STEP_FIELDS[2])) return;
-    window.open(contactLinks.whatsapp(message), "_blank", "noopener");
+    // Opened straight from the browser: the message never passes through our server.
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
     setStatus("Your enquiry has been prepared in WhatsApp. Please send it from there.");
   }
 
@@ -322,7 +323,7 @@ export function EnquiryForm({ copy, cities }: { copy: EnquiryFormCopy; cities: C
             <ErrorText id={`${fid("time")}-error`} show={err("time")} />
             <p className="mt-3 flex items-start gap-2 text-sm text-obsidian/70" aria-live="polite">
               {values.date && slots === "loading" && "Checking availability…"}
-              {values.date && slots === null && a.states.none}
+              {values.date && (slots === null || (Array.isArray(slots) && !slots.some((s) => s.available))) && a.states.none}
               {selectedAvailable === true && (
                 <>
                   <span className="mt-1.5 size-2 shrink-0 rounded-full bg-emerald-700" aria-hidden /> {a.states.available}

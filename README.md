@@ -12,7 +12,7 @@ Personal website for Gabrielle, independent high class companion.
 | Fonts | Cormorant Garamond (display) + DM Sans (body) via `next/font` | Self-hosted, no layout shift |
 | Hosting | GitHub → **Vercel** (auto deploy on push) · domain at GoDaddy | |
 | Backoffice | `/admin` — **Neon** (Postgres) + **Vercel Blob** (photos/videos) + own email/password login | Travels, photos, videos, gallery, lifestyle and links managed without code |
-| Availability (phase 2) | Google Calendar API, server-side only | Calendar stays the single source of availability |
+| Availability | Google Calendar API (service account), server-side only — see [docs/CALENDAR.md](docs/CALENDAR.md) | A dedicated calendar where events = available times |
 
 ## Backoffice (`/admin`)
 
@@ -101,6 +101,6 @@ src/
 - [x] Travels (copy V1): current destination, upcoming cards → Book Me with the city preselected
 - [x] Lifestyle (copy V1): fragrance, place and wishlist cards
 - [x] Gallery (copy V1): collections filled from numbered files, filters, lightbox
-- [ ] Privacy & cookie policy
+- [x] Privacy & cookie policy (texts of 16 Nov 2026), security headers (CSP, HSTS, frame blocking)
 - [x] Backoffice `/admin` (Neon + Vercel Blob): dashboard, travels, photos & videos, gallery, lifestyle, links, accounts
-- [ ] Google Calendar availability for Book Me
+- [x] Google Calendar availability for Book Me (inverted logic, 1h30 notice, 60 min buffer) — needs the setup in docs/CALENDAR.md

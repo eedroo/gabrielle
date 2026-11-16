@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { bookMe } from "@/content/book-me";
 import { getUpcomingTravels } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
+import { getSettings } from "@/lib/settings";
 import { formatRangeLong } from "@/lib/travels";
 import { EnquiryForm, type CityOption } from "@/components/book-me/EnquiryForm";
 import { FAQSection } from "@/components/book-me/FAQSection";
@@ -15,7 +16,7 @@ export const revalidate = 3600;
 
 export default async function BookMePage() {
   const { hero } = bookMe;
-  const travels = await getUpcomingTravels();
+  const [travels, settings] = await Promise.all([getUpcomingTravels(), getSettings()]);
   const cities: CityOption[] = travels.map((t) => ({
     id: t.id,
     label: t.city,
@@ -37,7 +38,7 @@ export default async function BookMePage() {
             <p className="mt-7 font-display text-2xl italic text-champagne">{hero.lead}</p>
             <Paragraphs items={hero.paragraphs} className="mt-4 text-warm-ivory/80 max-lg:sr-only" />
           </div>
-          <EnquiryForm copy={bookMe.form} cities={cities} />
+          <EnquiryForm copy={bookMe.form} cities={cities} whatsappNumber={settings.whatsapp_number.replace(/\D/g, "")} />
         </div>
       </section>
       <FAQSection />

@@ -1,10 +1,17 @@
 import Link from "next/link";
 import { Badge, Card, PageTitle } from "@/components/admin/ui";
 import { listGallery, listLifestyle, listTravels, slotSummary } from "@/lib/admin/queries";
+import { BOOKING_RULES, calendarHealth } from "@/lib/availability";
 import { currentTravel, formatRangeLong, upcomingTravels } from "@/lib/travels";
 
 export default async function DashboardPage() {
-  const [travels, slots, gallery, lifestyle] = await Promise.all([listTravels(), slotSummary(), listGallery(), listLifestyle()]);
+  const [travels, slots, gallery, lifestyle, calendar] = await Promise.all([
+    listTravels(),
+    slotSummary(),
+    listGallery(),
+    listLifestyle(),
+    calendarHealth(),
+  ]);
   const current = currentTravel(travels);
   const upcoming = upcomingTravels(travels);
   const next = current ?? upcoming[0] ?? null;
@@ -47,6 +54,26 @@ export default async function DashboardPage() {
           </p>
         </Card>
       )}
+
+      <h2 className="mt-10 font-display text-2xl">Availability calendar</h2>
+      <Card className="mt-4">
+        <div className="flex flex-wrap items-center gap-3">
+          {calendar.state === "connected" && <Badge tone="green">Connected</Badge>}
+          {calendar.state === "error" && <Badge tone="amber">Not working</Badge>}
+          {calendar.state === "not-configured" && <Badge tone="grey">Not connected yet</Badge>}
+          {calendar.state === "connected" && (
+            <p className="text-sm">
+              <strong>{calendar.name}</strong> · {calendar.windowsNext14Days} available period{calendar.windowsNext14Days === 1 ? "" : "s"} in the next 14 days
+            </p>
+          )}
+          {calendar.state === "error" && <p className="text-sm text-amber-900">{calendar.message}</p>}
+        </div>
+        <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-obsidian/65">
+          <li>Every event in this calendar is a period when you are available. An empty calendar means no times are offered.</li>
+          <li>Confirmed appointment? Add an event starting with “Booked” — that time plus {BOOKING_RULES.bufferMinutes} minutes before and after is no longer offered.</li>
+          <li>Requests need at least {BOOKING_RULES.minNoticeMinutes / 60} hours’ notice. Times are shown in {BOOKING_RULES.timeZone.replace("_", " ")} time.</li>
+        </ul>
+      </Card>
 
       <h2 className="mt-10 font-display text-2xl">Quick actions</h2>
       <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
