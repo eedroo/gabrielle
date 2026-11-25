@@ -1,9 +1,10 @@
-import { home } from "@/content/home";
+import { getTexts } from "@/lib/texts";
 import { site } from "@/content/site";
 import { BackgroundMedia } from "@/components/ui/BackgroundMedia";
 import { ArrowDown, WhatsApp } from "@/components/ui/Icons";
 
-export function HeroSection() {
+export async function HeroSection() {
+  const home = await getTexts("home");
   const { hero } = home;
   return (
     <section className="relative isolate flex min-h-[calc(100svh-6.5rem)] flex-col items-center justify-center overflow-hidden lg:min-h-[calc(100svh-7.5rem)]">

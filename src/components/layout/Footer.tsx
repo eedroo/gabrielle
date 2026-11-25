@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { legalLinks, navigation, site } from "@/content/site";
 import { getChannels } from "@/lib/settings";
+import { getTexts } from "@/lib/texts";
 import { channelLinkProps } from "./SocialLinks";
 
 function FooterList({ title, items }: { title: string; items: { label: string; href: string; external?: boolean }[] }) {
@@ -27,7 +28,7 @@ function FooterList({ title, items }: { title: string; items: { label: string; h
 }
 
 export async function Footer() {
-  const { social, contact } = await getChannels();
+  const [{ social, contact }, { signature }] = await Promise.all([getChannels(), getTexts("site")]);
   const year = new Date().getFullYear();
   return (
     <footer className="border-t border-warm-ivory/10 bg-obsidian">
@@ -36,7 +37,7 @@ export async function Footer() {
           <Link href="/" className="font-display text-3xl uppercase tracking-[0.3em]">
             {site.name}
           </Link>
-          <p className="mt-4 font-display text-xl italic text-champagne">{site.signature}</p>
+          <p className="mt-4 font-display text-xl italic text-champagne">{signature}</p>
         </div>
         <FooterList title="Navigation" items={navigation.map((n) => ({ ...n }))} />
         <FooterList title="Contact" items={contact.map(({ label, href }) => ({ label, href, external: true }))} />

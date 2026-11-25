@@ -1,10 +1,11 @@
-import { home } from "@/content/home";
+import { getTexts } from "@/lib/texts";
 import { Button } from "@/components/ui/Button";
 import { EditorialImage } from "@/components/ui/EditorialImage";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function LifestylePreview() {
+export async function LifestylePreview() {
+  const home = await getTexts("home");
   const { lifestyle } = home;
   const [a, b, c] = lifestyle.images;
   return (

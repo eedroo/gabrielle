@@ -1,7 +1,8 @@
-import { bookMe } from "@/content/book-me";
+import { getTexts } from "@/lib/texts";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function FAQSection() {
+export async function FAQSection() {
+  const bookMe = await getTexts("bookMe");
   const { faq } = bookMe;
   const jsonLd = {
     "@context": "https://schema.org",

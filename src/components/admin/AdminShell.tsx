@@ -8,6 +8,7 @@ import { Close, Menu } from "@/components/ui/Icons";
 
 const nav = [
   { href: "/admin", label: "Dashboard" },
+  { href: "/admin/texts", label: "Texts" },
   { href: "/admin/travels", label: "Travels" },
   { href: "/admin/photos", label: "Photos & videos" },
   { href: "/admin/gallery", label: "Gallery" },

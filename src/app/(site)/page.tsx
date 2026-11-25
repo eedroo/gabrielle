@@ -11,8 +11,9 @@ import { OccasionSection } from "@/components/home/OccasionSection";
 import type { Metadata } from "next";
 import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
+import { getTexts } from "@/lib/texts";
 
-export const generateMetadata = (): Promise<Metadata> => pageMetadata({ ...site.seo, path: "/" });
+export const generateMetadata = async (): Promise<Metadata> => pageMetadata({ ...(await getTexts("home")).seo, path: "/" });
 
 // Re-render hourly so "current destination" and the ticker follow the calendar.
 export const revalidate = 3600;

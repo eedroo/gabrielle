@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { lifestyle } from "@/content/lifestyle";
+import { getTexts } from "@/lib/texts";
 import { getLifestyleItems } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/shared/PageHero";
@@ -7,9 +7,11 @@ import { ClosingCTA } from "@/components/shared/ClosingCTA";
 import { EditorialCards } from "@/components/lifestyle/EditorialCards";
 import { SplitSection } from "@/components/lifestyle/SplitSection";
 
-export const generateMetadata = (): Promise<Metadata> => pageMetadata({ ...lifestyle.seo, path: "/lifestyle" });
+export const generateMetadata = async (): Promise<Metadata> =>
+  pageMetadata({ ...(await getTexts("lifestyle")).seo, path: "/lifestyle" });
 
 export default async function LifestylePage() {
+  const lifestyle = await getTexts("lifestyle");
   const items = await getLifestyleItems();
   const { introduction, fragrances, gastronomy, places, gestures, wishlist } = lifestyle;
   return (

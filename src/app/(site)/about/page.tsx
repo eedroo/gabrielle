@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { about } from "@/content/about";
+import { getTexts } from "@/lib/texts";
 import { pageMetadata } from "@/lib/seo";
 import { AboutHero } from "@/components/about/AboutHero";
 import { IntroductionSection } from "@/components/about/IntroductionSection";
@@ -8,9 +8,11 @@ import { AppreciateSection } from "@/components/about/AppreciateSection";
 import { MyWorldSection } from "@/components/about/MyWorldSection";
 import { ClosingCTA } from "@/components/shared/ClosingCTA";
 
-export const generateMetadata = (): Promise<Metadata> => pageMetadata({ ...about.seo, path: "/about" });
+export const generateMetadata = async (): Promise<Metadata> =>
+  pageMetadata({ ...(await getTexts("about")).seo, path: "/about" });
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const about = await getTexts("about");
   return (
     <>
       <AboutHero />

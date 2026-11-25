@@ -1,4 +1,4 @@
-import { travelsPage } from "@/content/travels-page";
+import { getTexts } from "@/lib/texts";
 import type { Travel } from "@/lib/travels";
 import { cityImage, flagEmoji, formatRangeFull } from "@/lib/travels";
 import { Button } from "@/components/ui/Button";
@@ -6,7 +6,8 @@ import { EditorialImage } from "@/components/ui/EditorialImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 /** Only rendered when today falls inside a published trip. */
-export function CurrentDestination({ trip }: { trip: Travel }) {
+export async function CurrentDestination({ trip }: { trip: Travel }) {
+  const travelsPage = await getTexts("travels");
   const { current, fallbackCityImage } = travelsPage;
   const image = cityImage(trip, fallbackCityImage);
   return (

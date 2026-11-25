@@ -1,9 +1,10 @@
-import { about } from "@/content/about";
+import { getTexts } from "@/lib/texts";
 import { EditorialImage } from "@/components/ui/EditorialImage";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function IntroductionSection() {
+export async function IntroductionSection() {
+  const about = await getTexts("about");
   const { introduction } = about;
   return (
     <section id="introduction" className="section scroll-mt-20 bg-warm-ivory text-obsidian">

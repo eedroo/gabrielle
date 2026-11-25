@@ -1,9 +1,10 @@
-import { travelsPage } from "@/content/travels-page";
+import { getTexts } from "@/lib/texts";
 import { Button } from "@/components/ui/Button";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function OtherDestinations() {
+export async function OtherDestinations() {
+  const travelsPage = await getTexts("travels");
   const { other } = travelsPage;
   return (
     <section className="section bg-deep-brown">

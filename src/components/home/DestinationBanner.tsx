@@ -1,4 +1,4 @@
-import { home } from "@/content/home";
+import { getTexts } from "@/lib/texts";
 import { getCurrentTravel, getUpcomingTravels } from "@/lib/data";
 import { cityImage, formatRangeLong } from "@/lib/travels";
 import { Button } from "@/components/ui/Button";
@@ -6,6 +6,7 @@ import { EditorialImage } from "@/components/ui/EditorialImage";
 
 /** Slim banner with the current (or next) destination's city photo. */
 export async function DestinationBanner() {
+  const home = await getTexts("home");
   const { destinationBanner: copy, travels } = home;
   const [current, upcoming] = await Promise.all([getCurrentTravel(), getUpcomingTravels()]);
   const trip = current ?? upcoming[0] ?? null;

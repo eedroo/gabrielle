@@ -25,7 +25,7 @@ export const blobEnabled = () => Boolean(blobToken());
 /** Why uploads cannot work in production, for the admin (variable names only, never values). */
 export function storageProblem(): string | null {
   if (blobEnabled() || process.env.NODE_ENV !== "production") return null;
-  const names = Object.keys(process.env).filter((k) => /BLOB/i.test(k));
+  const names = Object.keys(process.env).filter((k) => /BLOB/i.test(k) && k !== "VERCEL_BLOB_RETRIES");
   return (
     "Photo and video uploads are not connected yet. In Vercel, open Storage → your Blob store → Projects, " +
     "connect it to this project (keep the prefix BLOB), then redeploy. " +

@@ -1,10 +1,11 @@
-import { travelsPage } from "@/content/travels-page";
+import { getTexts } from "@/lib/texts";
 import { Divider } from "@/components/ui/Divider";
 import { EditorialImage } from "@/components/ui/EditorialImage";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function PhilosophySection() {
+export async function PhilosophySection() {
+  const travelsPage = await getTexts("travels");
   const { philosophy } = travelsPage;
   return (
     <section className="section bg-warm-ivory text-obsidian">

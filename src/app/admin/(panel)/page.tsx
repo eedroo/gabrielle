@@ -24,6 +24,7 @@ export default async function DashboardPage() {
   ];
 
   const actions = [
+    { href: "/admin/texts", title: "Edit texts", text: "Change any text on the website, page by page." },
     { href: "/admin/travels", title: "Add a travel", text: "Announce a new destination and dates." },
     { href: "/admin/photos", title: "Replace photos", text: "Swap temporary photos for official ones." },
     { href: "/admin/gallery", title: "Upload to the gallery", text: "Add photos to a collection." },

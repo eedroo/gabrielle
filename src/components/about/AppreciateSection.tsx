@@ -1,8 +1,9 @@
-import { about } from "@/content/about";
+import { getTexts } from "@/lib/texts";
 import { EditorialImage } from "@/components/ui/EditorialImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function AppreciateSection() {
+export async function AppreciateSection() {
+  const about = await getTexts("about");
   const { appreciate } = about;
   return (
     <section className="section bg-warm-ivory text-obsidian">

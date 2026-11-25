@@ -8,6 +8,7 @@ import { removeStoredFile } from "@/lib/admin/storage";
 import { collectionDefs } from "@/content/gallery";
 import { isKnownSlot } from "@/content/slots";
 import { SETTING_KEYS } from "@/lib/settings";
+import { listTextFields, splitParagraphs, textPageLabels, type TextPageId } from "@/lib/texts";
 
 async function db() {
   await requireAdmin();
@@ -240,4 +241,49 @@ export async function saveSettings(_: FormState, fd: FormData): Promise<FormStat
     revalidateSite();
     return "Links saved. The website is updated.";
   });
+}
+
+/* ───────────── Texts ───────────── */
+
+/** Saves one section of a page. Empty or unchanged fields fall back to the original text. */
+export async function saveTexts(_: FormState, fd: FormData): Promise<FormState> {
+  return handle(async () => {
+    const q = await db();
+    const page = text(fd, "page") as TextPageId;
+    const section = text(fd, "section");
+    if (!(page in textPageLabels)) throw new FormError("Unknown page.");
+    const fields = listTextFields(page).filter((f) => f.section === section);
+    if (fields.length === 0) throw new FormError("Unknown section.");
+
+    const normalise = (s: string) => s.replace(/\r\n/g, "\n").trim();
+    for (const field of fields) {
+      const raw = fd.get(field.key);
+      if (raw === null) continue;
+      const value = field.kind === "paragraphs" ? splitParagraphs(normalise(String(raw))).join("\n\n") : normalise(String(raw)).replace(/\s*\n\s*/g, " ");
+      const missing = field.placeholders.filter((p) => !value.includes(p));
+      if (value && missing.length) throw new FormError(`“${field.label}” must keep ${missing.join(", ")} — it is replaced automatically on the website.`);
+      if (value.length > 5000) throw new FormError(`“${field.label}” is too long.`);
+
+      if (!value || value === normalise(field.defaultValue)) {
+        await q`DELETE FROM content_texts WHERE key = ${field.key}`;
+      } else {
+        await q`
+          INSERT INTO content_texts (key, value) VALUES (${field.key}, ${value})
+          ON CONFLICT (key) DO UPDATE SET value = ${value}, updated_at = now()`;
+      }
+    }
+    revalidateSite();
+    return "Texts saved. The website is updated.";
+  });
+}
+
+/** Back to the original copy for one section. */
+export async function resetTexts(page: string, section: string) {
+  const q = await db();
+  if (!(page in textPageLabels)) throw new Error("Unknown page");
+  const keys = listTextFields(page as TextPageId)
+    .filter((f) => f.section === section)
+    .map((f) => f.key);
+  if (keys.length) await q`DELETE FROM content_texts WHERE key IN ${q(keys)}`;
+  revalidateSite();
 }

@@ -20,7 +20,8 @@ English-language panel for Gabrielle (and the agency) to run the website:
 
 | Section | What it manages |
 | --- | --- |
-| Dashboard | Next destination, counts, photos still temporary |
+| Dashboard | Next destination, counts, photos still temporary, calendar status |
+| Texts | Every text on every page (incl. SEO titles/descriptions), section by section, with reset to original |
 | Travels | Destinations and dates (ticker, home, Travels, Book Me cities) |
 | Photos & videos | Every photo slot on the site + background videos; Official / Temporary / Missing |
 | Gallery | Photos per collection, order, descriptions |
@@ -32,6 +33,7 @@ How it fits together:
 
 - **Data**: Neon via `DATABASE_URL`. Migrations in `db/migrations` run automatically before every build (`scripts/migrate.mjs`).
 - **Files**: uploaded from the browser straight to Vercel Blob (`/api/admin/upload`). Locally without a Blob token they go to `public/uploads` (git-ignored).
+- **Texts**: `src/content/*` is the default copy; edits are stored in `content_texts` by path (e.g. `home.hero.title`) and applied by `getTexts()` (`src/lib/texts.ts`). Placeholders such as `{city}` are enforced.
 - **Fallbacks**: an official photo saved for a slot wins over the file in `public/images`, which wins over the gradient placeholder. Without a database, the site runs on `src/content`.
 - **Live updates**: every save revalidates the public pages; no redeploy needed.
 - **WhatsApp**: all links go through `/whatsapp`, which redirects to the number saved in the panel.

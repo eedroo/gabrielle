@@ -1,10 +1,11 @@
-import { about } from "@/content/about";
+import { getTexts } from "@/lib/texts";
 import { Divider } from "@/components/ui/Divider";
 import { EditorialImage } from "@/components/ui/EditorialImage";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function PersonalitySection() {
+export async function PersonalitySection() {
+  const about = await getTexts("about");
   const { personality } = about;
   return (
     <section className="section bg-obsidian">

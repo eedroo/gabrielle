@@ -1,6 +1,7 @@
-import { home } from "@/content/home";
+import { getTexts } from "@/lib/texts";
 import { VideoStatement } from "@/components/shared/VideoStatement";
 
-export function OccasionSection() {
+export async function OccasionSection() {
+  const home = await getTexts("home");
   return <VideoStatement {...home.occasion} />;
 }

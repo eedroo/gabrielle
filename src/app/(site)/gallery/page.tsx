@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { gallery, getGalleryCollections } from "@/content/gallery";
+import { getGalleryCollections } from "@/content/gallery";
+import { getTexts } from "@/lib/texts";
 import { pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/shared/PageHero";
 import { ClosingCTA } from "@/components/shared/ClosingCTA";
@@ -7,9 +8,11 @@ import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export const generateMetadata = (): Promise<Metadata> => pageMetadata({ ...gallery.seo, path: "/gallery" });
+export const generateMetadata = async (): Promise<Metadata> =>
+  pageMetadata({ ...(await getTexts("gallery")).seo, path: "/gallery" });
 
 export default async function GalleryPage() {
+  const gallery = await getTexts("gallery");
   const collections = await getGalleryCollections();
   return (
     <>

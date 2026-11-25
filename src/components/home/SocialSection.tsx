@@ -1,4 +1,4 @@
-import { home } from "@/content/home";
+import { getTexts } from "@/lib/texts";
 import { getChannels } from "@/lib/settings";
 import { channelIcons } from "@/components/layout/SocialLinks";
 import { ArrowRight } from "@/components/ui/Icons";
@@ -6,6 +6,7 @@ import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export async function SocialSection() {
+  const home = await getTexts("home");
   const { social } = home;
   const { social: channels } = await getChannels();
   return (

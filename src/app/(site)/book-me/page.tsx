@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { bookMe } from "@/content/book-me";
+import { getTexts } from "@/lib/texts";
 import { getUpcomingTravels } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 import { getSettings } from "@/lib/settings";
@@ -9,12 +9,14 @@ import { FAQSection } from "@/components/book-me/FAQSection";
 import { BackgroundMedia } from "@/components/ui/BackgroundMedia";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 
-export const generateMetadata = (): Promise<Metadata> => pageMetadata({ ...bookMe.seo, path: "/book-me" });
+export const generateMetadata = async (): Promise<Metadata> =>
+  pageMetadata({ ...(await getTexts("bookMe")).seo, path: "/book-me" });
 
 // Cities follow the published travels.
 export const revalidate = 3600;
 
 export default async function BookMePage() {
+  const bookMe = await getTexts("bookMe");
   const { hero } = bookMe;
   const [travels, settings] = await Promise.all([getUpcomingTravels(), getSettings()]);
   const cities: CityOption[] = travels.map((t) => ({

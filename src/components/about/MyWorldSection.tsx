@@ -1,10 +1,11 @@
-import { about } from "@/content/about";
+import { getTexts } from "@/lib/texts";
 import { Button } from "@/components/ui/Button";
 import { EditorialImage } from "@/components/ui/EditorialImage";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function MyWorldSection() {
+export async function MyWorldSection() {
+  const about = await getTexts("about");
   const { myWorld } = about;
   const [a, b] = myWorld.images;
   return (

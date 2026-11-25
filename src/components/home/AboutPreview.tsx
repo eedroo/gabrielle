@@ -1,10 +1,11 @@
-import { home } from "@/content/home";
+import { getTexts } from "@/lib/texts";
 import { Button } from "@/components/ui/Button";
 import { EditorialImage } from "@/components/ui/EditorialImage";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function AboutPreview() {
+export async function AboutPreview() {
+  const home = await getTexts("home");
   const { about } = home;
   return (
     <section id="about" className="section scroll-mt-20 bg-warm-ivory text-obsidian">

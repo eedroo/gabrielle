@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { travelsPage } from "@/content/travels-page";
+import { getTexts } from "@/lib/texts";
 import type { Travel } from "@/lib/travels";
 import { cityImage, flagEmoji, formatRangeFull } from "@/lib/travels";
 import { EditorialImage } from "@/components/ui/EditorialImage";
@@ -7,7 +7,8 @@ import { ArrowRight } from "@/components/ui/Icons";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function UpcomingDestinations({ trips }: { trips: Travel[] }) {
+export async function UpcomingDestinations({ trips }: { trips: Travel[] }) {
+  const travelsPage = await getTexts("travels");
   const { upcoming, fallbackCityImage } = travelsPage;
   return (
     <section id="upcoming" className="section scroll-mt-20 bg-obsidian">

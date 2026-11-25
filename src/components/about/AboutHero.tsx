@@ -1,9 +1,10 @@
-import { about } from "@/content/about";
+import { getTexts } from "@/lib/texts";
 import { Button } from "@/components/ui/Button";
 import { EditorialImage } from "@/components/ui/EditorialImage";
 import { Paragraphs } from "@/components/ui/Paragraphs";
 
-export function AboutHero() {
+export async function AboutHero() {
+  const about = await getTexts("about");
   const { hero } = about;
   return (
     <section className="relative isolate flex min-h-[calc(100svh-6.5rem)] items-end overflow-hidden lg:min-h-[min(80vh,780px)] lg:items-center">

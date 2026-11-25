@@ -1,4 +1,4 @@
-import { home } from "@/content/home";
+import { getTexts } from "@/lib/texts";
 import { getCurrentTravel, getUpcomingTravels } from "@/lib/data";
 import { flagEmoji, formatRangeLong } from "@/lib/travels";
 import { Button } from "@/components/ui/Button";
@@ -8,6 +8,7 @@ import { Paragraphs } from "@/components/ui/Paragraphs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export async function TravelsSection() {
+  const home = await getTexts("home");
   const { travels: copy } = home;
   const [current, upcoming] = await Promise.all([getCurrentTravel(), getUpcomingTravels()]);
 
