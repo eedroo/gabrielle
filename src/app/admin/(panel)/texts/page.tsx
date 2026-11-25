@@ -26,7 +26,7 @@ export default async function TextsPage({ searchParams }: { searchParams: Promis
     <>
       <PageTitle
         title="Texts"
-        description="Every text on the website, page by page and section by section. Save a section and the website updates straight away. “Reset” brings back the original text."
+        description="The texts of the website, page by page and section by section. Save a section and the website updates straight away. “Reset” brings back the original text. Page titles, section headings and search-engine texts (SEO) stay fixed to protect the website’s ranking — ask the agency if one needs to change."
       />
 
       <nav aria-label="Pages" className="mb-8 flex flex-wrap gap-2">

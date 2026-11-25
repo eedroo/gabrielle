@@ -41,6 +41,19 @@ const SKIP_KEYS = new Set(["href", "src", "alt", "slot", "video", "media", "imag
 /** Lifestyle cards are managed in the backoffice Lifestyle page. */
 const SKIP_PATHS = new Set(["lifestyle.fragrances.items", "lifestyle.places.items", "lifestyle.wishlist.items"]);
 
+/**
+ * SEO-related copy stays as approved and is not editable in the backoffice:
+ * page titles/descriptions (seo.*) and the section headings that form the
+ * planned H1/H2 hierarchy (*.title, destination banner titles). Card titles
+ * inside lists (items.*) remain editable.
+ */
+export function isSeoLocked(path: string): boolean {
+  const parts = path.split(".");
+  if (parts.includes("seo")) return true;
+  if (parts.includes("items")) return false;
+  return parts[parts.length - 1] === "title" || parts.includes("titles");
+}
+
 const isStringList = (v: unknown): v is string[] => Array.isArray(v) && v.length > 0 && v.every((x) => typeof x === "string");
 export const splitParagraphs = (s: string) =>
   s
@@ -50,7 +63,7 @@ export const splitParagraphs = (s: string) =>
 
 function apply(value: unknown, path: string, overrides: Map<string, string>): unknown {
   if (SKIP_PATHS.has(path)) return value;
-  if (typeof value === "string") return overrides.get(path) ?? value;
+  if (typeof value === "string") return isSeoLocked(path) ? value : (overrides.get(path) ?? value);
   if (isStringList(value)) {
     const saved = overrides.get(path);
     return saved ? splitParagraphs(saved) : value;
@@ -102,7 +115,7 @@ export function listTextFields(id: TextPageId): TextField[] {
   const fields: TextField[] = [];
   const walk = (value: unknown, parts: string[]) => {
     const key = [id, ...parts].join(".");
-    if (SKIP_PATHS.has(key)) return;
+    if (SKIP_PATHS.has(key) || isSeoLocked(key)) return;
     const section = parts[0] ?? "general";
     const label = parts.length > 1 ? parts.slice(1).map(humanize).join(" · ") : humanize(parts[0] ?? id);
     if (typeof value === "string") {
@@ -125,7 +138,8 @@ export function listTextSections(id: TextPageId) {
   const order = [...new Set(fields.map((f) => f.section))];
   return order.map((section) => {
     const sectionFields = fields.filter((f) => f.section === section);
-    const heading = sectionFields.find((f) => f.key.endsWith(`.${section}.title`))?.defaultValue;
+    const content = (pages[id] as Record<string, unknown>)[section];
+    const heading = content && typeof content === "object" && "title" in content ? String(content.title) : undefined;
     return { section, title: humanize(section), heading, fields: sectionFields };
   });
 }
